@@ -1,63 +1,74 @@
-document.getElementById("diet-form").addEventListener("submit", function(event) {
-    event.preventDefault();
-    
-    const nombre = document.getElementById("nombre").value;
-    const email = document.getElementById("email").value;
-    const objetivo = document.getElementById("objetivo").value;
-    
-    if (nombre && email && objetivo) {
-        alert("¡Registro exitoso! Recibirás tu plan en tu correo electrónico.");
-        document.getElementById("diet-form").reset();
-    } else {
-        alert("Por favor, completa todos los campos.");
-    }
-});
+<script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+        e.preventDefault();  // Evitar el envío del formulario
 
-document.getElementById("btn-pago").addEventListener("click", function() {
-    window.location.href = "https://www.paypal.com/paypalme/tuusuario/19.99";
-});
-const objetivo = document.getElementById('objetivo');
-const formularioPersonalizado = document.getElementById('formularioPersonalizado');
+        // Obtener los valores del formulario
+        const sexo = document.querySelector("#sexo").value;
+        const edad = parseInt(document.querySelector("#edad").value);
+        const peso = parseFloat(document.querySelector("#peso").value);
+        const altura = parseFloat(document.querySelector("#altura").value);
+        const actividad = document.querySelector("#actividad").value;
+        const objetivo = document.querySelector("#objetivo").value;
+        const grasa = document.querySelector("#grasa").value;
 
-objetivo.addEventListener('change', function() {
-    const seleccion = objetivo.value;
-    formularioPersonalizado.innerHTML = ''; // Limpiar los campos previos
+        // Calcular TMB según Harris-Benedict
+        let tmb;
+        if (sexo === "masculino") {
+            tmb = 88.362 + (13.397 * peso) + (4.799 * altura) - (5.677 * edad);
+        } else {
+            tmb = 447.593 + (9.247 * peso) + (3.098 * altura) - (4.330 * edad);
+        }
 
-    if (seleccion === 'bajar') {
-        formularioPersonalizado.innerHTML = `
-            <label for="peso">Peso actual (kg):</label>
-            <input type="number" id="peso" name="peso" required>
+        // Multiplicar por el factor de actividad
+        let factorActividad;
+        switch (actividad) {
+            case "sedentario":
+                factorActividad = 1.2;
+                break;
+            case "ligero":
+                factorActividad = 1.375;
+                break;
+            case "moderado":
+                factorActividad = 1.55;
+                break;
+            case "intenso":
+                factorActividad = 1.725;
+                break;
+        }
 
-            <label for="altura">Altura (cm):</label>
-            <input type="number" id="altura" name="altura" required>
+        let calorias = tmb * factorActividad;
 
-            <label for="deporte">¿Qué deporte realizas?</label>
-            <input type="text" id="deporte" name="deporte">
+        // Cálculo de macros
+        const proteinas = peso * 2; // 2g por kg de peso corporal
+        const grasas = peso * 1;    // 1g por kg de peso corporal
+        const carbohidratos = (calorias - (proteinas * 4 + grasas * 9)) / 4;
 
-            <label for="intolerancias">¿Tienes alguna intolerancia alimentaria?</label>
-            <input type="text" id="intolerancias" name="intolerancias">
-        `;
-    } else if (seleccion === 'ganar') {
-        formularioPersonalizado.innerHTML = `
-            <label for="peso">Peso actual (kg):</label>
-            <input type="number" id="peso" name="peso" required>
+        // Crear el plan de entrenamiento personalizado
+        let planEntrenamiento;
+        switch (actividad) {
+            case "sedentario":
+                planEntrenamiento = "Plan recomendado: Caminatas suaves, estiramientos básicos.";
+                break;
+            case "ligero":
+                planEntrenamiento = "Plan recomendado: Yoga, caminatas rápidas, ejercicios en casa.";
+                break;
+            case "moderado":
+                planEntrenamiento = "Plan recomendado: Entrenamiento de fuerza, ejercicio cardiovascular moderado.";
+                break;
+            case "intenso":
+                planEntrenamiento = "Plan recomendado: Entrenamiento de alta intensidad, pesas, HIIT.";
+                break;
+        }
 
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" name="edad" required>
+        // Mostrar los resultados
+        alert(`
+            Calorías diarias: ${calorias.toFixed(0)} kcal
+            Proteínas: ${proteinas} g
+            Grasas: ${grasas} g
+            Carbohidratos: ${carbohidratos.toFixed(0)} g
 
-            <label for="alturag">Altura (cm):</label>
-            <input type="number" id="alturag" name="alturag" required>
-
-            <label for="deporte">¿Qué deporte realizas?</label>
-            <input type="text" id="deporte" name="deporte">
-        `;
-    } else {
-        formularioPersonalizado.innerHTML = `
-            <label for="peso">Peso actual (kg):</label>
-            <input type="number" id="peso" name="peso" required>
-
-            <label for="alturag">Altura (cm):</label>
-            <input type="number" id="alturag" name="alturag" required>
-        `;
-    }
-});
+            Objetivo: ${objetivo}
+            Plan de entrenamiento: ${planEntrenamiento}
+        `);
+    });
+</script>
