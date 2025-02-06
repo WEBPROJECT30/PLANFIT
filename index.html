@@ -3,54 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAMBIA TU VIDA - Planes Personalizados</title>
-    <link rel="stylesheet" href="styles.CSS">
-    <script src="script.JS" defer></script>
+    <title>Formulario Futurista</title>
+    <style>
+        body {
+            background: #121212;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        h2 {
+            text-align: center;
+            color: #ffeb3b;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: 1px solid #555;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+        input:focus, select:focus {
+            background: #444;
+            border-color: #ffeb3b;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #ffeb3b;
+            color: #121212;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #ffb300;
+        }
+    </style>
 </head>
 <body>
-    <!-- Barra de navegación -->
-    <header>
-        <nav>
-            <img src="logo.png" alt="WebProject Logo" id="logo">
-            <ul>
-                <li><a href="#home">Inicio</a></li>
-                <li><a href="#planes">Planes Personalizados</a></li>
-                <li><a href="#sobre-nosotros">Sobre Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Sección principal -->
-    <section id="home">
-        <h1>Bienvenido a WebProject</h1>
-        <p>Genera tu plan personalizado para perder peso, ganar masa muscular o mantener tu peso.</p>
-    </section>
-
-    <!-- Sección de formulario -->
-    <section id="formulario">
-        <h2>Genera tu plan personalizado</h2>
-        <form id="dietaForm">
-            <label for="objetivo">¿Cuál es tu objetivo?</label>
-            <select id="objetivo" name="objetivo">
-                <option value="mantener">Mantener peso</option>
-                <option value="bajar">Bajar peso</option>
-                <option value="ganar">Ganar masa muscular</option>
-                <option value="ganar">Subir de peso</option>
-            </select>
-
-            <div id="formularioPersonalizado">
-                <!-- Los campos personalizados aparecerán aquí -->
+    <div class="form-container">
+        <h2>Formulario Personalizado</h2>
+        <form action="#" method="POST">
+            <!-- Sexo -->
+            <div class="form-group">
+                <label for="sexo">Tu sexo:</label>
+                <select id="sexo" name="sexo" required>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="otro">Otro</option>
+                </select>
             </div>
-
+            <!-- Edad -->
+            <div class="form-group">
+                <label for="edad">Tu edad:</label>
+                <input type="number" id="edad" name="edad" placeholder="Introduce tu edad" required>
+            </div>
+            <!-- Peso -->
+            <div class="form-group">
+                <label for="peso">Tu peso en kg:</label>
+                <input type="number" id="peso" name="peso" placeholder="Introduce tu peso en kg" required>
+            </div>
+            <!-- Altura -->
+            <div class="form-group">
+                <label for="altura">Tu altura en cm:</label>
+                <input type="number" id="altura" name="altura" placeholder="Introduce tu altura en cm" required>
+            </div>
+            <!-- Nivel de actividad -->
+            <div class="form-group">
+                <label for="actividad">Nivel de actividad física diaria:</label>
+                <select id="actividad" name="actividad" required>
+                    <option value="sedentario">Sedentario</option>
+                    <option value="ligero">Ligero</option>
+                    <option value="moderado">Moderado</option>
+                    <option value="intenso">Intenso</option>
+                </select>
+            </div>
+            <!-- Objetivo -->
+            <div class="form-group">
+                <label for="objetivo">Objetivo principal:</label>
+                <select id="objetivo" name="objetivo" required>
+                    <option value="perder_peso">Perder peso</option>
+                    <option value="mantener_peso">Mantener peso</option>
+                    <option value="ganar_masa">Ganar masa muscular</option>
+                </select>
+            </div>
+            <!-- Grasa corporal -->
+            <div class="form-group">
+                <label for="grasa">Tu grasa corporal % (Opcional):</label>
+                <input type="number" id="grasa" name="grasa" placeholder="Introduce tu porcentaje de grasa corporal">
+                <small><a href="#">Puedes calcularlo aquí</a></small>
+            </div>
             <button type="submit">Generar Plan</button>
         </form>
-    </section>
-
-    <!-- Sección de contacto -->
-    <section id="contacto">
-        <h2>Contacto</h2>
-        <p>Puedes contactarnos en <a href="mailto:info@webproject.com">info@webproject.com</a></p>
-    </section>
+    </div>
 </body>
 </html>
